@@ -1,7 +1,12 @@
 package com.cnsi.reqtrace.model.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class ExcelReqCertify {
 
+	@Id
 	private String Checklist_ID;
 	
 	private String Checklist_Standard;
