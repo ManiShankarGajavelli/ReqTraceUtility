@@ -17,7 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cnsi.reqtrace.exception.FileStorageException;
-import com.cnsi.reqtrace.model.FileStoragePath;
+import com.cnsi.reqtrace.model.domain.FileStoragePath;
 
 @Service
 public class FileStorageService {
@@ -54,24 +54,16 @@ public class FileStorageService {
 		        System.out.println("Workbook has " + workbook.getNumberOfSheets() + " Sheets : ");
 		        System.out.println("Retrieving Sheets using Java 8 forEach with lambda");
 		        workbook.forEach(sheet -> {
-		            System.out.println("=> " + sheet.getSheetName());
+		        	sheet.forEach(row -> {
+			            row.forEach(cell -> {
+			                System.out.print(cell + "\t");
+			            });
+			            System.out.println();
+			        });
 		        });
 		        
-		        // 3. Or you can use Java 8 forEach loop with lambda
-		        System.out.println("\n\nIterating over Rows and Columns using Java 8 forEach with lambda\n");
-		        Sheet sheet = workbook.getSheetAt(0);
-		        sheet.forEach(row -> {
-		            row.forEach(cell -> {
-		                System.out.print(cell + "\t");
-		            });
-		            System.out.println();
-		        });
-		        
+
 		        workbook.close();
-		        
-
-
-
 	            return fileName;
 	        } catch (IOException ex) {
 	            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);

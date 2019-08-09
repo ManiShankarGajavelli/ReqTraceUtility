@@ -1,4 +1,4 @@
-package com.cnsi.reqtrace.model;
+package com.cnsi.reqtrace.model.domain;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
