@@ -57,38 +57,47 @@ public class FileStorageService {
 		        Workbook workbook = WorkbookFactory.create(targetLocation.toFile());
 		        List<ExcelReqCertify> l_alReqCertifyExcelData = new ArrayList<ExcelReqCertify>();
 		        workbook.forEach(sheet -> {
+		        	System.out.println("Excel Sheet Name is :"+sheet.getSheetName());
 		        	sheet.forEach(row -> {
-		        		ExcelReqCertify l_objExcelRow = new ExcelReqCertify();
-		            	l_objExcelRow.setChecklist_ID(row.getCell(0).getStringCellValue());
-		            	l_objExcelRow.setChecklist_Standard(row.getCell(1).getStringCellValue());
-		            	l_objExcelRow.setChecklist_Description(row.getCell(2).getStringCellValue());
-		            	l_objExcelRow.setCriteria_Number(row.getCell(3).getStringCellValue());
-		            	l_objExcelRow.setCriteria_Name(row.getCell(4).getStringCellValue());
-		            	l_objExcelRow.setCriteria_Business_Objective(row.getCell(5).getStringCellValue());
-		            	l_objExcelRow.setCriteria_Description(row.getCell(6).getStringCellValue());
-		            	l_objExcelRow.setCriteria_Source(row.getCell(7).getStringCellValue());
-		            	l_objExcelRow.setBusiness_Process(row.getCell(8).getStringCellValue());
-		            	l_objExcelRow.setBusiness_Process_ID(row.getCell(9).getStringCellValue());
-		            	l_objExcelRow.setBusiness_Area(row.getCell(10).getStringCellValue());
-		            	l_alReqCertifyExcelData.add(l_objExcelRow);
-//		            	ExcelH2Data.save(l_objExcelRow);
-		            	System.out.println(l_alReqCertifyExcelData);
+		        		if(row.getRowNum()==0) {
+		        			
+		        		}else {
+			        		ExcelReqCertify l_objExcelRow = new ExcelReqCertify();
+			            	l_objExcelRow.setChecklist_ID(row.getCell(0).getStringCellValue());
+			            	l_objExcelRow.setChecklist_Standard(row.getCell(1).getStringCellValue());
+			            	l_objExcelRow.setChecklist_Description(row.getCell(2).getStringCellValue());
+			            	l_objExcelRow.setCriteria_Number(row.getCell(3).getStringCellValue());
+			            	l_objExcelRow.setCriteria_Name(row.getCell(4).getStringCellValue());
+			            	l_objExcelRow.setCriteria_Business_Objective(row.getCell(5).getStringCellValue());
+			            	l_objExcelRow.setCriteria_Description(row.getCell(6).getStringCellValue());
+			            	l_objExcelRow.setCriteria_Source(row.getCell(7).getStringCellValue());
+			            	l_objExcelRow.setBusiness_Process(row.getCell(8).getStringCellValue());
+			            	l_objExcelRow.setBusiness_Process_ID(row.getCell(9).getStringCellValue());
+			            	l_objExcelRow.setBusiness_Area(row.getCell(10).getStringCellValue());
+			            	l_alReqCertifyExcelData.add(l_objExcelRow);
+			            	ExcelH2Data.save(l_objExcelRow);
+			            	System.out.println(l_alReqCertifyExcelData);
+		        		}
 //			            row.forEach(cell -> {
 			            	
 //			            });
-			            System.out.println();
 			        });
 		        });
 		        
 
 		        workbook.close();
 	            return fileName;
-	        } catch (IOException ex) {
+	        } 
+	        catch (IOException ex) {
 	            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
-	        } catch (InvalidFormatException exInvalidFormatException) {
+	        } 
+	        catch (InvalidFormatException exInvalidFormatException) {
 	        	throw new FileStorageException("Invalid file format Exception : " + fileName + ". Please try again!", exInvalidFormatException);
 				
+			}catch(Exception ex) {
+				System.out.println(ex.getMessage());
 			}
+			return fileName;
 	    }
 
 	

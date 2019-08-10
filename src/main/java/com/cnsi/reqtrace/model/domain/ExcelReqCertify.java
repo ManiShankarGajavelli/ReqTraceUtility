@@ -1,12 +1,21 @@
 package com.cnsi.reqtrace.model.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Size;
 
 @Entity
 public class ExcelReqCertify {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EXCEL_REQ_CERTIFY_SEQ")
+	@SequenceGenerator(name="EXCEL_REQ_CERTIFY_SEQ", sequenceName="EXCEL_REQ_CERTIFY_SEQ", allocationSize=100)
+	private Long CheckList_Sequence_NO;
+	
+
 	private String Checklist_ID;
 	
 	private String Checklist_Standard;
@@ -19,6 +28,7 @@ public class ExcelReqCertify {
 	
 	private String Criteria_Business_Objective;
 	
+	@Size(max = 2000)
 	private String Criteria_Description;
 	
 	private String 	Criteria_Source;
